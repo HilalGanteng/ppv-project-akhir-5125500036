@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Belajar - PENS</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+
+        <!-- HEADER & NAVIGASI -->
+        <header class="header">
+            <p class="badge">POLITEKNIK ELEKTRONIKA NEGERI SURABAYA</p>
+            <img src="assets/logo.svg" alt="Logo Timer Belajar" class="logo" width="64" height="64">
+            <h1>Timer Belajar</h1>
+            <p class="subtitle">Waktunya fokus, bukan scroll terus!</p>
+
+            <nav class="nav-container" aria-label="Navigasi utama">
+                <button type="button" id="nav-timer" class="nav-btn active" data-target="screen-timer" aria-current="page">Timer</button>
+                <button type="button" id="nav-stats" class="nav-btn" data-target="screen-stats">Riwayat</button>
+                <button type="button" id="nav-settings" class="nav-btn" data-target="screen-settings">Pengaturan</button>
+            </nav>
+        </header>
+
+        <!-- HALAMAN 1: TIMER BELAJAR -->
+        <section id="screen-timer" class="screen active">
+            <div class="timer-card">
+                <div class="input-section">
+                    <label for="duration">Durasi belajar</label>
+                    <div class="input-wrapper" id="inputWrapper">
+                        <input type="number" id="duration" placeholder="Masukkan durasi" min="1" max="180" inputmode="numeric">
+                        <span>menit</span>
+                    </div>
+                    <p id="errorMessage" class="error-message" role="alert"></p>
+                </div>
+
+                <div class="timer-display">
+                    <span id="timer" aria-live="off">00:00</span>
+                </div>
+
+                <div class="progress" aria-hidden="true">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+
+                <p id="status" class="status empty">
+                    Belum ada sesi belajar. Yuk mulai belajar! 📚
+                </p>
+
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <span>Menyiapkan timer...</span>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" id="startBtn" class="btn start-btn">▶ Mulai</button>
+                    <button type="button" id="pauseBtn" class="btn pause-btn" disabled>⏸ Pause</button>
+                    <button type="button" id="resetBtn" class="btn reset-btn">↻ Reset</button>
+                </div>
+
+                <p class="shortcut">Tips: tekan <strong>Enter</strong> untuk memulai timer</p>
+            </div>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="icon-wrapper">🎯</div>
+                    <h3>Fokus</h3>
+                    <p>Kurangi distraksi dan maksimalkan hasil belajar.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-wrapper">⏱️</div>
+                    <h3>Teratur</h3>
+                    <p>Tentukan durasi belajar sesuai kemampuanmu.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-wrapper">☕</div>
+                    <h3>Istirahat</h3>
+                    <p>Selesaikan tugasmu dan jaga stamina tubuh.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 2: RIWAYAT BELAJAR -->
+        <section id="screen-stats" class="screen">
+            <div class="timer-card">
+                <h2>📊 Riwayat & statistik belajar</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number" id="totalSessions">0</span>
+                        <span class="stat-label">Sesi selesai</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" id="totalMinutes">0</span>
+                        <span class="stat-label">Total menit</span>
+                    </div>
+                </div>
+
+                <div class="history-list-wrapper">
+                    <h3>Daftar sesi terakhir</h3>
+                    <ul id="historyList" class="history-list"></ul>
+                </div>
+
+                <div class="history-actions">
+                    <button type="button" id="clearHistoryBtn" class="btn reset-btn">🗑 Hapus semua riwayat</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 3: PENGATURAN -->
+        <section id="screen-settings" class="screen">
+            <div class="timer-card">
+                <h2>⚙️ Pengaturan timer</h2>
+
+                <div class="setting-item">
+                    <label for="soundToggle">Suara efek &amp; alarm</label>
+                    <input type="checkbox" id="soundToggle" class="setting-check" checked>
+                </div>
+
+                <div class="setting-item">
+                    <label for="volumeRange">Volume suara</label>
+                    <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="0.5">
+                </div>
+
+                <div class="setting-item">
+                    <label for="darkToggle">Mode gelap</label>
+                    <input type="checkbox" id="darkToggle" class="setting-check">
+                </div>
+
+                <div class="setting-item setting-center">
+                    <button type="button" id="testSoundBtn" class="btn reset-btn">🔊 Uji coba suara alarm</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
